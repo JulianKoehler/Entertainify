@@ -3,10 +3,16 @@ import type { RootState } from ".";
 
 interface AuthState {
   isAuthenticated: boolean;
+  token: string | null;
+  tokenDuration: number | null;
+  tokenExpired: boolean | null;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
+  token: null,
+  tokenDuration: null,
+  tokenExpired: null,
 };
 
 const authSlice = createSlice({
