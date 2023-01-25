@@ -1,4 +1,5 @@
 import { Form, Link, useSearchParams } from "react-router-dom";
+import Button from "../../styles/UI/Button";
 
 const AuthForm = () => {
   const [searchParams] = useSearchParams();
@@ -23,7 +24,7 @@ const AuthForm = () => {
       <input
         type="password"
         name="password"
-        placeholder="password"
+        placeholder="Password"
         required
       />
       {!isLogin && (
@@ -34,7 +35,7 @@ const AuthForm = () => {
           required
         />
       )}
-      <button>{isLogin ? "Login to your account" : "Create an account"}</button>
+      <Button>{isLogin ? "Login to your account" : "Create an account"}</Button>
       {isLogin && (
         <p>
           Don't have an account? <Link to="?mode=signup">Sign Up</Link>

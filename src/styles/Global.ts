@@ -34,45 +34,45 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Outfit', sans-serif;
     }
 
-    h1, 
-    h2, 
-    h3, 
-    h4, 
-    h5, 
-    h6, 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
     p {
         margin: 0;
     }
 
     h1 {
         font-weight: 300;
-        font-size: 32px;
-        line-height: 40px;
-        letter-spacing: -0.5px;
+        font-size: 3.2rem;
+        line-height: 4rem;
+        letter-spacing: -0.05rem;
     }
 
     h2 {
         font-weight: 300;
-        font-size: 24px;
-        line-height: 30px;
+        font-size: 2.4rem;
+        line-height: 3rem;
     }
 
     h3 {
         font-weight: 500;
-        font-size: 24px;
-        line-height: 30px;
+        font-size: 2.4rem;
+        line-height: 3rem;
     }
 
     h4 {
         font-weight: 500;
-        font-size: 18px;
-        line-height: 23px;
+        font-size: 1.8rem;
+        line-height: 2.3rem;
     }
 
     p, span {
         font-weight: 300;
-        font-size: 15px;
-        line-height: 19px;
+        font-size: 1.5rem;
+        line-height: 1.9rem;
     }
 
     a {
@@ -82,6 +82,12 @@ const GlobalStyles = createGlobalStyle`
 
     #root {
         display: flex;
+    }
+
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px var(--semi-dark-blue) inset !important;
+        -webkit-text-fill-color: white !important;
+        box-shadow: 0 0 0 1000px var(--semi-dark-blue) inset !important;
     }
 `;
 
