@@ -5,7 +5,7 @@ import { getAuth } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   projectId: "entertainify-e4d16",

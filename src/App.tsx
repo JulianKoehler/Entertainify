@@ -1,8 +1,15 @@
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route, createBrowserRouter, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { useAppSelector } from "./store/hooks";
 import { selectAuth } from "./store/auth-slice";
-import Login from "./pages/Login";
+import AuthPage from "./pages/Auth";
 import Home from "./pages/Home";
 import RootLayout from "./pages/Root";
 import Movies from "./pages/Movies";
@@ -16,34 +23,24 @@ const url = `https://entertainify-e4d16-default-rtdb.europe-west1.firebasedataba
 function App() {
   const clientIsAuthenticated = useAppSelector(selectAuth);
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+      children: [
+        { path: "home", element: <Home /> },
+        { path: "movies", element: <Movies /> },
+        { path: "series", element: <Series /> },
+        { path: "bookmarked", element: <Bookmarked /> },
+      ],
+    },
+    { path: "/auth", element: <AuthPage /> },
+  ]);
+
   return (
     <>
-      <BrowserRouter>
-        <GlobalStyles />
-        <Routes>
-          <Route
-            path="/"
-            element={<RootLayout />}>
-            <Route
-              index
-              path="home"
-              element={<Home />}
-            />
-            <Route
-              path="movies"
-              element={<Movies />}
-            />
-            <Route
-              path="series"
-              element={<Series />}
-            />
-            <Route
-              path="bookmarked"
-              element={<Bookmarked />}
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <GlobalStyles />
+      <RouterProvider router={router} />
     </>
   );
 }

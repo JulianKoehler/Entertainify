@@ -25,6 +25,7 @@ function Navbar() {
           <NavLink to="/bookmarked">
             <NavBookmarked />
           </NavLink>
+          <NavLink to="/auth?mode=login">Login</NavLink>
         </nav>
         <NavUserProfile />
       </div>
