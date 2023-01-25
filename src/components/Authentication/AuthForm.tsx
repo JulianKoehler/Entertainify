@@ -1,41 +1,80 @@
-import { Form, Link, useSearchParams } from "react-router-dom";
+import { useRef } from "react";
+import { Form, Link, useActionData, useNavigation, useSearchParams } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
 import Button from "../../styles/UI/Button";
+
+const loadingSpinner = (
+  <TailSpin
+    height="22"
+    width="22"
+    color="var(--semi-dark-blue)"
+    ariaLabel="tail-spin-loading"
+    radius="1"
+    wrapperStyle={{}}
+    wrapperClass=""
+    visible={true}
+  />
+);
 
 const AuthForm = () => {
   const [searchParams] = useSearchParams();
   const mode = searchParams.get("mode");
   const isLogin = mode === "login";
 
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
+  const passwordRef = useRef(null);
+  const confirmedPasswordRef = useRef(null);
+
+  const authData = useActionData();
+  const isEmailInvalid = authData === "INVALID_EMAIL";
+  const isPasswordInvalid = authData === "INVALID_PASSWORD";
+  const emailNotFound = authData === "EMAIL_NOT_FOUND";
+
   if (mode !== "login" && mode !== "signup") {
     throw new Error("Unsupported auth mode. Use either login or singup");
   }
 
+  console.log(authData);
+
   return (
-    <Form
-      action="/auth"
-      method="post">
+    <Form method="post">
       <h1>{isLogin ? "Login" : "Sign up"}</h1>
       <input
+        className={isEmailInvalid || emailNotFound ? "invalid" : ""}
         type="email"
         name="email"
         placeholder="Email address"
         required
       />
+      {isEmailInvalid && <p className="invalid-email">Invalid email address</p>}
+      {emailNotFound && <p className="invalid-email">Email not found</p>}
       <input
+        className={isPasswordInvalid ? "invalid" : ""}
+        ref={passwordRef}
         type="password"
         name="password"
         placeholder="Password"
         required
       />
+      {isPasswordInvalid && <p className="invalid-password">Invalid password</p>}
+
       {!isLogin && (
         <input
+          ref={confirmedPasswordRef}
           type="password"
           name="passwordConfirmation"
           placeholder="Confirm password"
-          required
+          // required
         />
       )}
-      <Button>{isLogin ? "Login to your account" : "Create an account"}</Button>
+      {isLogin && (
+        <Button disabled={isSubmitting}>{isSubmitting ? loadingSpinner : "Login to your account"}</Button>
+      )}
+      {!isLogin && (
+        <Button disabled={isSubmitting}>{isSubmitting ? loadingSpinner : "Create an account"}</Button>
+      )}
       {isLogin && (
         <p>
           Don't have an account? <Link to="?mode=signup">Sign Up</Link>

@@ -1,7 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import AuthPageWrapper from "../styles/UI/AuthForm";
 import AuthForm from "../components/Authentication/AuthForm";
 import Logo from "../components/UI/Logo";
+import { json, redirect } from "react-router-dom";
+import { firebaseConfig } from "../firebase";
+import { useAppDispatch } from "../store/hooks";
+import { setErrorMessage } from "../store/auth-slice";
 
 const AuthPage = () => {
   return (
@@ -14,53 +17,57 @@ const AuthPage = () => {
 
 export default AuthPage;
 
-const AuthPageWrapper = styled.div`
-  margin: 10rem auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5rem;
+export async function action({ request }: { request: Request }) {
+  const searchParams = new URL(request.url).searchParams;
+  const authMode = searchParams.get("mode");
+  const authEndpoint = authMode === "login" ? firebaseConfig.signInWithPassword : firebaseConfig.signUp;
 
-  & img {
-    max-width: 3.2rem;
+  if (authMode !== "login" && authMode !== "signup") {
+    throw json({ message: "Unsupported auth mode. Use either login or singup" }, { status: 422 });
   }
 
-  & form {
-    background-color: var(--semi-dark-blue);
-    width: 40rem;
-    padding: 3.2rem;
-    border-radius: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  const formData = await request.formData();
+  const authData = {
+    email: formData.get("email"),
+    password: formData.get("password"),
+  };
 
-    & input {
-      padding: 0 1rem 1.8rem 1rem;
-      background-color: transparent;
-      border: none;
-      border-bottom: 1px solid var(--greyish-blue);
-      color: var(--white);
+  try {
+    const response = await fetch(authEndpoint, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(authData),
+    });
 
-      &:focus {
-        outline: none;
+    if (!response.ok) {
+      const resData = await response.json();
+      let errorMessage = "Authentication failed.";
+      if (resData) {
+        errorMessage = resData.error.message;
       }
+
+      throw new Error(errorMessage);
     }
 
-    & h1 {
-      margin-bottom: 2rem;
-    }
+    const resData = await response.json();
+    console.log(resData);
 
-    & button {
-      margin-top: 2rem;
-    }
+    const token = resData.idToken;
+    localStorage.setItem("token", token);
 
-    & p {
-      text-align: center;
-      margin-top: 0.4rem;
+    const expiration = new Date();
+    expiration.setHours(expiration.getHours() + 1);
+    localStorage.setItem("expiration", expiration.toISOString());
 
-      & a {
-        color: var(--red);
-      }
-    }
+    console.log(resData);
+
+    return redirect("/");
+  } catch (err) {
+    let errorMessage = "Authentication failed";
+    if (err instanceof Error) errorMessage = err.message;
+
+    return errorMessage;
   }
-`;
+}

@@ -6,6 +6,7 @@ interface AuthState {
   token: string | null;
   tokenDuration: number | null;
   tokenExpired: boolean | null;
+  errorMessage: string | null;
 }
 
 const initialState: AuthState = {
@@ -13,6 +14,7 @@ const initialState: AuthState = {
   token: null,
   tokenDuration: null,
   tokenExpired: null,
+  errorMessage: null,
 };
 
 const authSlice = createSlice({
@@ -25,10 +27,13 @@ const authSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
     },
+    setErrorMessage(state, action) {
+      state.errorMessage = action.payload;
+    },
   },
 });
 
 export const selectAuth = (state: RootState) => state.auth.isAuthenticated;
-export const { login, logout } = authSlice.actions;
+export const { login, logout, setErrorMessage } = authSlice.actions;
 
 export default authSlice.reducer;

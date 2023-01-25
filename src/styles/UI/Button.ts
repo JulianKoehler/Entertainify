@@ -11,10 +11,16 @@ const Button = styled.button`
   line-height: 1.9rem;
   cursor: pointer;
   transition: all 0.25s;
+  display: flex;
+  justify-content: center;
 
   &:active {
     color: var(--semi-dark-blue);
     background-color: var(--white);
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 `;
 
