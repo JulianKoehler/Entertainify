@@ -9,10 +9,6 @@ export interface Data {
       medium: string;
       small: string;
     };
-    trending: {
-      large: string;
-      small: string;
-    };
   };
   title: string;
   year: number;
@@ -20,6 +16,17 @@ export interface Data {
 
 export interface Trending extends Data {
   isTrending: true;
+  thumbnail: {
+    regular: {
+      large: string;
+      medium: string;
+      small: string;
+    };
+    trending: {
+      large: string;
+      small: string;
+    };
+  };
 }
 
 export interface Movie extends Data {
