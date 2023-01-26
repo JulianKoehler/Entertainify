@@ -11,6 +11,7 @@ import Bookmarked from "./pages/Bookmarked";
 import GlobalStyles from "./styles/Global";
 import { action as authAction } from "./pages/Auth";
 import { loader as tokenLoader } from "./util/auth";
+import { action as logoutAction } from "./pages/Logout";
 
 import data from "../../starter-code/starter-code/data.json";
 import Error from "./pages/Error";
@@ -52,6 +53,7 @@ function App() {
       ],
     },
     { path: "auth", element: <AuthPage />, action: authAction },
+    { path: "logout", action: logoutAction },
   ]);
 
   return (

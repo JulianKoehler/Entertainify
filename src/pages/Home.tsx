@@ -1,17 +1,32 @@
-import { defer, redirect } from "react-router-dom";
+import { Suspense } from "react";
+import { Await, defer, redirect, useLoaderData } from "react-router-dom";
 import styled from "styled-components";
+import RecommendedContent from "../components/Content/RecommendedContent";
+import TrendingContent from "../components/Content/TrendingContent";
 import { firebaseConfig } from "../firebase";
-import { getAuthToken, redirectIfNotAuthenticated } from "../util/auth";
+import { Trending, Data as Recommended } from "../models/moviesAndSeries";
+import { getAuthToken } from "../util/auth";
 
 const Home = () => {
+  const { trending } = useLoaderData() as { trending: Promise<Trending[]> };
+  const { recommended } = useLoaderData() as { recommended: Promise<Recommended[]> };
+
   return (
     <HomePage>
-      <Trending>
+      <TrendingSection>
         <h1>Trending</h1>
-      </Trending>
-      <Recommended>
+        <Suspense>
+          <Await resolve={trending}>{loadedContent => <TrendingContent content={loadedContent} />}</Await>
+        </Suspense>
+      </TrendingSection>
+      <RecommendedSection>
         <h1>Recommended for you</h1>
-      </Recommended>
+        <Suspense>
+          <Await resolve={recommended}>
+            {loadedContent => <RecommendedContent content={loadedContent} />}
+          </Await>
+        </Suspense>
+      </RecommendedSection>
     </HomePage>
   );
 };
@@ -38,18 +53,33 @@ async function loadTrending() {
     if (!res.ok) {
       throw new Error("Could not fetch trending movies and series");
     }
+    const resData = await res.json();
 
-    return await res.json();
-  } catch (error) {
-    console.log(error);
+    return resData;
+  } catch (err) {
+    console.log(err);
   }
 }
 
-async function loadRecommended() {}
+async function loadRecommended() {
+  try {
+    const res = await fetch(firebaseConfig.dbRecommended);
+
+    if (!res.ok) {
+      throw new Error("Could not fetch recommended movies and series");
+    }
+
+    const resData = await res.json();
+
+    return resData;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 const HomePage = styled.div`
   padding: 2.5rem;
 `;
 
-const Trending = styled.div``;
-const Recommended = styled.div``;
+const TrendingSection = styled.section``;
+const RecommendedSection = styled.section``;

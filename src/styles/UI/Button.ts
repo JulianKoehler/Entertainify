@@ -14,13 +14,14 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
 
-  &:active {
+  &:active:not(:disabled) {
     color: var(--semi-dark-blue);
     background-color: var(--white);
   }
 
   &:disabled {
     opacity: 0.5;
+    cursor: not-allowed;
   }
 `;
 

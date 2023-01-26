@@ -52,11 +52,11 @@ export async function action({ request }: { request: Request }) {
     const resData = await response.json();
 
     const token = resData.idToken;
-    localStorage.setItem("token", token);
+    localStorage.setItem("entertainify_token", token);
 
     const expiration = new Date();
     expiration.setHours(expiration.getHours() + 1);
-    localStorage.setItem("expiration", expiration.toISOString());
+    localStorage.setItem("entertainify_expiration", expiration.toISOString());
 
     console.log(resData);
 
