@@ -7,7 +7,7 @@ const RootLayout = () => {
   return (
     <>
       <Navbar />
-      <main>
+      <Main>
         <Search>
           <img
             src={searchIcon}
@@ -19,7 +19,7 @@ const RootLayout = () => {
           />
         </Search>
         <Outlet />
-      </main>
+      </Main>
     </>
   );
 };
@@ -56,4 +56,8 @@ const Search = styled.div`
       border-bottom: 1px solid var(--greyish-blue);
     }
   }
+`;
+
+const Main = styled.main`
+  max-width: calc(100% - 13.6rem);
 `;

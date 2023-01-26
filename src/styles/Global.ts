@@ -82,6 +82,7 @@ const GlobalStyles = createGlobalStyle`
 
     #root {
         display: flex;
+        max-width: 100%;
     }
 
     input:-webkit-autofill {

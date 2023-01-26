@@ -37,6 +37,7 @@ const AuthForm = () => {
   const isEmailInvalid = authData === "INVALID_EMAIL";
   const isPasswordInvalid = authData === "INVALID_PASSWORD";
   const isPasswordTooShort = authData === "WEAK_PASSWORD : Password should be at least 6 characters";
+  const isMissingPassword = authData === "MISSING_PASSWORD";
   const emailNotFound = authData === "EMAIL_NOT_FOUND";
 
   const [isFormValid, setIsFormValid] = useState(false);
@@ -93,6 +94,7 @@ const AuthForm = () => {
       />
       {isPasswordInvalid && <p className="invalid-password">Invalid password</p>}
       {isPasswordTooShort && <p className="invalid-password">Should be at least 6 characters</p>}
+      {isMissingPassword && <p className="invalid-password">Missing password</p>}
       {!isLogin && (
         <input
           ref={confirmedPasswordRef}

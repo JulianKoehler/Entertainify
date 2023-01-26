@@ -12,26 +12,28 @@ import GlobalStyles from "./styles/Global";
 import { action as authAction } from "./pages/Auth";
 import { loader as tokenLoader } from "./util/auth";
 import { action as logoutAction } from "./pages/Logout";
-
-import data from "../../starter-code/starter-code/data.json";
 import Error from "./pages/Error";
 
-const movies = data.filter(item => item.category === "Movie");
-const series = data.filter(item => item.category === "TV Series");
-const bookmarked = data.filter(item => item.isBookmarked === true);
-const isTrending = data.filter(item => item.isTrending === true);
+// import data from "../../starter-code/starter-code/data.json";
+// import { firebaseConfig } from "./firebase";
+
+// const movies = data.filter(item => item.category === "Movie");
+// const series = data.filter(item => item.category === "TV Series");
+// const bookmarked = data.filter(item => item.isBookmarked === true);
+// const isTrending = data.filter(item => item.isTrending === true);
+// const recommended = data.filter(item => item.isTrending === false);
 
 function App() {
   const clientIsAuthenticated = useAppSelector(selectAuth);
 
   // useEffect(() => {
   //   async function sendData() {
-  //     const response = fetch(url, {
+  //     const response = fetch(firebaseConfig.dbRecommended, {
   //       method: "put",
   //       headers: {
   //         "Content-Type": "application/json",
   //       },
-  //       body: JSON.stringify(data),
+  //       body: JSON.stringify(recommended),
   //     });
   //     console.log(response);
   //   }

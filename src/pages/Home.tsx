@@ -64,6 +64,7 @@ async function loadRecommended() {
     }
 
     const resData = await res.json();
+    console.log(resData);
 
     return resData;
   } catch (err) {
@@ -71,5 +72,18 @@ async function loadRecommended() {
   }
 }
 
-const TrendingSection = styled.section``;
-const RecommendedSection = styled.section``;
+const TrendingSection = styled.section`
+  overflow-x: scroll;
+  max-width: 100%;
+
+  & h1 {
+    margin-bottom: 4rem;
+  }
+`;
+const RecommendedSection = styled.section`
+  width: 100%;
+
+  & h1 {
+    margin: 4rem 0;
+  }
+`;

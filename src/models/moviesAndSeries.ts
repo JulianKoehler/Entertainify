@@ -3,7 +3,17 @@ export interface Data {
   isBookmarked: boolean;
   isTrending: boolean;
   rating: string;
-  thumbnail: object;
+  thumbnail: {
+    regular: {
+      large: string;
+      medium: string;
+      small: string;
+    };
+    trending: {
+      large: string;
+      small: string;
+    };
+  };
   title: string;
   year: number;
 }
