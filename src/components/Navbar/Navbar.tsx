@@ -13,18 +13,26 @@ function Navbar() {
       <div className="content">
         <Logo />
         <nav>
-          <NavLink to="/home">
-            <NavHome />
-          </NavLink>
-          <NavLink to="/movies">
-            <NavMovies />
-          </NavLink>
-          <NavLink to="/series">
-            <NavSeries />
-          </NavLink>
-          <NavLink to="/bookmarked">
-            <NavBookmarked />
-          </NavLink>
+          <li>
+            <NavLink to="/home">
+              <NavHome />
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/movies">
+              <NavMovies />
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/series">
+              <NavSeries />
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/bookmarked">
+              <NavBookmarked />
+            </NavLink>
+          </li>
           <NavLink to="/auth?mode=login">Login</NavLink>
         </nav>
         <NavUserProfile />

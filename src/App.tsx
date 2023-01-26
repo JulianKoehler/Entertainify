@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useAppSelector } from "./store/hooks";
 import { selectAuth } from "./store/auth-slice";
 import AuthPage from "./pages/Auth";
-import Home from "./pages/Home";
+import Home, { loader as homeLoader } from "./pages/Home";
 import RootLayout from "./pages/Root";
 import Movies from "./pages/Movies";
 import Series from "./pages/Series";
@@ -13,8 +13,7 @@ import { action as authAction } from "./pages/Auth";
 import { loader as tokenLoader } from "./util/auth";
 
 import data from "../../starter-code/starter-code/data.json";
-
-const url = `https://entertainify-e4d16-default-rtdb.europe-west1.firebasedatabase.app/recommended.json`;
+import Error from "./pages/Error";
 
 const movies = data.filter(item => item.category === "Movie");
 const series = data.filter(item => item.category === "TV Series");
@@ -42,9 +41,11 @@ function App() {
     {
       path: "/",
       element: <RootLayout />,
+      errorElement: <Error />,
+      id: "root",
       loader: tokenLoader,
       children: [
-        { path: "home", element: <Home /> },
+        { path: "home", element: <Home />, loader: homeLoader },
         { path: "movies", element: <Movies /> },
         { path: "series", element: <Series /> },
         { path: "bookmarked", element: <Bookmarked /> },

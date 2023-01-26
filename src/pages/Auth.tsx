@@ -3,8 +3,6 @@ import AuthForm from "../components/Authentication/AuthForm";
 import Logo from "../components/UI/Logo";
 import { json, redirect } from "react-router-dom";
 import { firebaseConfig } from "../firebase";
-import { useAppDispatch } from "../store/hooks";
-import { setErrorMessage } from "../store/auth-slice";
 
 const AuthPage = () => {
   return (
@@ -52,7 +50,6 @@ export async function action({ request }: { request: Request }) {
     }
 
     const resData = await response.json();
-    console.log(resData);
 
     const token = resData.idToken;
     localStorage.setItem("token", token);
@@ -63,7 +60,7 @@ export async function action({ request }: { request: Request }) {
 
     console.log(resData);
 
-    return redirect("/");
+    return redirect("/home");
   } catch (err) {
     let errorMessage = "Authentication failed";
     if (err instanceof Error) errorMessage = err.message;

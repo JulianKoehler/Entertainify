@@ -21,7 +21,19 @@ const Sidebar = styled.aside`
       display: flex;
       flex-direction: column;
       gap: 3.5rem;
+
+      & li {
+        list-style: none;
+
+        &:hover {
+          color: var(--red);
+        }
+      }
     }
+  }
+
+  & .navLink:hover > .navLink__cell {
+    fill: var(--red);
   }
 `;
 
