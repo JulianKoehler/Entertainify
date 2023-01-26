@@ -5,9 +5,9 @@ import { selectAuth } from "./store/auth-slice";
 import AuthPage from "./pages/Auth";
 import Home, { loader as homeLoader } from "./pages/Home";
 import RootLayout from "./pages/Root";
-import Movies from "./pages/Movies";
-import Series from "./pages/Series";
-import Bookmarked from "./pages/Bookmarked";
+import Movies, { loader as moviesLoader } from "./pages/Movies";
+import Series, { loader as seriesLoader } from "./pages/Series";
+import Bookmarked, { loader as bookmarkedLoader } from "./pages/Bookmarked";
 import GlobalStyles from "./styles/Global";
 import { action as authAction } from "./pages/Auth";
 import { loader as tokenLoader } from "./util/auth";
@@ -43,13 +43,12 @@ function App() {
       path: "/",
       element: <RootLayout />,
       errorElement: <Error />,
-      id: "root",
       loader: tokenLoader,
       children: [
         { path: "home", element: <Home />, loader: homeLoader },
-        { path: "movies", element: <Movies /> },
-        { path: "series", element: <Series /> },
-        { path: "bookmarked", element: <Bookmarked /> },
+        { path: "movies", element: <Movies />, loader: moviesLoader },
+        { path: "series", element: <Series />, loader: seriesLoader },
+        { path: "bookmarked", element: <Bookmarked />, loader: bookmarkedLoader },
       ],
     },
     { path: "auth", element: <AuthPage />, action: authAction },

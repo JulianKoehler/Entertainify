@@ -33,7 +33,6 @@ function Navbar() {
               <NavBookmarked />
             </NavLink>
           </li>
-          <NavLink to="/auth?mode=login">Login</NavLink>
         </nav>
         <NavUserProfile />
       </div>

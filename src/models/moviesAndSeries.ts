@@ -16,10 +16,10 @@ export interface Movie extends Data {
   category: "Movie";
 }
 
-export interface Series extends Data {
+export interface ISeries extends Data {
   category: "TV Series";
 }
 
-export interface Bookmarked extends Data {
+export interface IBookmarked extends Data {
   isBookmarked: true;
 }

@@ -5,14 +5,14 @@ import RecommendedContent from "../components/Content/RecommendedContent";
 import TrendingContent from "../components/Content/TrendingContent";
 import { firebaseConfig } from "../firebase";
 import { Trending, Data as Recommended } from "../models/moviesAndSeries";
-import { getAuthToken } from "../util/auth";
+import PageContent from "../styles/Pages/PageContent";
 
 const Home = () => {
   const { trending } = useLoaderData() as { trending: Promise<Trending[]> };
   const { recommended } = useLoaderData() as { recommended: Promise<Recommended[]> };
 
   return (
-    <HomePage>
+    <PageContent>
       <TrendingSection>
         <h1>Trending</h1>
         <Suspense>
@@ -27,19 +27,13 @@ const Home = () => {
           </Await>
         </Suspense>
       </RecommendedSection>
-    </HomePage>
+    </PageContent>
   );
 };
 
 export default Home;
 
 export async function loader() {
-  const isAuthenticated = getAuthToken(); // returns null if no token is stored in LocalStorage
-
-  if (!isAuthenticated) {
-    return redirect("/auth?mode=login");
-  }
-
   return defer({
     trending: loadTrending(),
     recommended: loadRecommended(),
@@ -76,10 +70,6 @@ async function loadRecommended() {
     console.log(err);
   }
 }
-
-const HomePage = styled.div`
-  padding: 2.5rem;
-`;
 
 const TrendingSection = styled.section``;
 const RecommendedSection = styled.section``;

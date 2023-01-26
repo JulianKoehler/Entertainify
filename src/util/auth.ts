@@ -6,13 +6,10 @@ export function getAuthToken() {
 }
 
 export function loader() {
-  return getAuthToken();
-}
-
-export function redirectIfNotAuthenticated() {
   const token = getAuthToken();
 
   if (!token) {
     return redirect("/auth?mode=login");
   }
+  return token;
 }
