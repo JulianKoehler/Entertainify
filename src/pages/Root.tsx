@@ -1,9 +1,36 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData, useNavigate, useSubmit } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "../components/Navbar/Navbar";
 import searchIcon from "../assets/icon-search.svg";
+import { useEffect } from "react";
+import { getTokenDuration } from "../util/auth";
 
 const RootLayout = () => {
+  const navigate = useNavigate();
+  const submit = useSubmit();
+  const token = useLoaderData();
+
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+
+    if (token === "EXPIRED") {
+      submit(null, { action: "/logout", method: "post" });
+      return;
+    }
+
+    const tokenDuration = getTokenDuration();
+
+    setTimeout(() => {
+      submit(null, { action: "/logout", method: "post" });
+    }, tokenDuration);
+  }, [token, submit]);
+
+  useEffect(() => {
+    navigate("/home");
+  }, []);
+
   return (
     <>
       <Navbar />

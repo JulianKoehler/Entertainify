@@ -69,8 +69,6 @@ const AuthForm = () => {
     clientSideValidation();
   }, [mode]);
 
-  console.log(authData);
-
   return (
     <Form method="post">
       <h1>{isLogin ? "Login" : "Sign up"}</h1>

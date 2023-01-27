@@ -3,7 +3,6 @@ import { Await, defer, redirect, useLoaderData } from "react-router-dom";
 import { firebaseConfig } from "../firebase";
 import { ISeries } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
-import { getAuthToken } from "../util/auth";
 
 const Series = () => {
   const { series } = useLoaderData() as { series: Promise<ISeries[]> };

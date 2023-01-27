@@ -31,6 +31,7 @@ const RecommendedContent = ({ content }: RecommendedContentProps) => {
               <span>&middot;</span>
               <span>{item?.rating}</span>
             </div>
+            <h3>{item.title}</h3>
           </Card>
         );
       })}
@@ -54,6 +55,11 @@ const ContentGrid = styled.div`
     & span {
       font-size: 1.3rem;
       font-weight: 300;
+      opacity: 0.75;
     }
+  }
+
+  & h3 {
+    font-size: 1.8rem;
   }
 `;

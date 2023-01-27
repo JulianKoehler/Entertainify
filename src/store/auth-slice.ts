@@ -21,11 +21,13 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login(state) {
+    login(state, action) {
+      state.token = action.payload;
       state.isAuthenticated = true;
     },
     logout(state) {
       state.isAuthenticated = false;
+      state.token = null;
     },
     setErrorMessage(state, action) {
       state.errorMessage = action.payload;

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Await, defer, redirect, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import RecommendedContent from "../components/Content/RecommendedContent";
 import TrendingContent from "../components/Content/TrendingContent";
@@ -15,13 +15,13 @@ const Home = () => {
     <PageContent>
       <TrendingSection>
         <h1>Trending</h1>
-        <Suspense>
+        <Suspense fallback={<p>Please wait...</p>}>
           <Await resolve={trending}>{loadedContent => <TrendingContent content={loadedContent} />}</Await>
         </Suspense>
       </TrendingSection>
       <RecommendedSection>
         <h1>Recommended for you</h1>
-        <Suspense>
+        <Suspense fallback={<p>Please wait...</p>}>
           <Await resolve={recommended}>
             {loadedContent => <RecommendedContent content={loadedContent} />}
           </Await>
@@ -41,12 +41,15 @@ export async function loader() {
 }
 
 async function loadTrending() {
+  const idToken = localStorage.getItem("entertainify_token");
+
   try {
-    const res = await fetch(firebaseConfig.dbIsTrending);
+    const res = await fetch(`${firebaseConfig.dbIsTrending}?auth=${idToken}`);
 
     if (!res.ok) {
-      throw new Error("Could not fetch trending movies and series");
+      throw new Error(`Could not fetch trending movies and series, ${res.statusText}`);
     }
+
     const resData = await res.json();
 
     return resData;
@@ -56,15 +59,16 @@ async function loadTrending() {
 }
 
 async function loadRecommended() {
+  const idToken = localStorage.getItem("entertainify_token");
+
   try {
-    const res = await fetch(firebaseConfig.dbRecommended);
+    const res = await fetch(`${firebaseConfig.dbRecommended}?auth=${idToken}`);
 
     if (!res.ok) {
-      throw new Error("Could not fetch recommended movies and series");
+      throw new Error(`Could not fetch recommended movies and series, ${res.statusText}`);
     }
 
     const resData = await res.json();
-    console.log(resData);
 
     return resData;
   } catch (err) {
