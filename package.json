@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build GENERATE_SOURCEMAP=false",
+    "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
