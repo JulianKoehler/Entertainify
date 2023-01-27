@@ -4,7 +4,7 @@ export function getAuthToken() {
   const token = localStorage.getItem("entertainify_token");
   const tokenDuration = getTokenDuration();
 
-  if (!token) {
+  if (!token || token.length < 683) {
     return null;
   }
 
@@ -31,6 +31,5 @@ export function getTokenDuration() {
   const now = new Date();
   const duration = expirationDate.getTime() - now.getTime();
 
-  console.log(duration);
   return duration;
 }

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 interface CardProps {
@@ -7,12 +7,12 @@ interface CardProps {
 }
 
 const Card = ({ children, trending = false }: CardProps) => {
-  return <Style trending={trending}>{children}</Style>;
+  return <Wrapper trending={trending}>{children}</Wrapper>;
 };
 
 export default Card;
 
-const Style = styled.div<{ trending: boolean }>`
+const Wrapper = styled.div<{ trending: boolean }>`
   border-radius: 0.8rem;
   position: relative;
 
@@ -20,5 +20,15 @@ const Style = styled.div<{ trending: boolean }>`
     width: ${({ trending }) => (trending ? "47rem" : "28rem")};
     height: ${({ trending }) => (trending ? "23rem" : "17.4rem")};
     border-radius: 0.8rem;
+    transition: opacity 0.25s;
+  }
+
+  &:hover > img {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+
+  &:hover > .play-button {
+    opacity: 1;
   }
 `;

@@ -1,17 +1,32 @@
 import styled from "styled-components";
-import { Data as Recommended } from "../../models/moviesAndSeries";
+import { Data as Recommended, IBookmarked, ISeries, Movie } from "../../models/moviesAndSeries";
 import Card from "../UI/Card";
 import movieIcon from "../../assets/icon-category-movie.svg";
 import seriesIcon from "../../assets/icon-category-tv.svg";
+import PlayButton from "../UI/PlayButton";
+import Bookmark from "../../styles/UI/Bookmark";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
-interface RecommendedContentProps {
-  content: Recommended[];
+interface ContentProps {
+  content: Recommended[] | ISeries[] | Movie[] | IBookmarked[];
 }
 
-const RecommendedContent = ({ content }: RecommendedContentProps) => {
+const Content = ({ content }: ContentProps) => {
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("search_query");
+
+  useEffect(() => {
+    console.log(query);
+  }, [searchParams]);
+
+  const filteredContent = query
+    ? content.filter(item => item.title.toLowerCase().includes(query.toLowerCase()))
+    : content;
+
   return (
     <ContentGrid>
-      {content.map(item => {
+      {filteredContent.map(item => {
         const categoryIcon = item.category === "Movie" ? movieIcon : seriesIcon;
         return (
           <Card key={item?.title}>
@@ -32,6 +47,8 @@ const RecommendedContent = ({ content }: RecommendedContentProps) => {
               <span>{item?.rating}</span>
             </div>
             <h3>{item.title}</h3>
+            <PlayButton yOffset="40%" />
+            <Bookmark bookmarked={item.isBookmarked} />
           </Card>
         );
       })}
@@ -39,13 +56,14 @@ const RecommendedContent = ({ content }: RecommendedContentProps) => {
   );
 };
 
-export default RecommendedContent;
+export default Content;
 
 const ContentGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: 3.2rem;
-  padding-bottom: 4rem;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, 28rem);
+  grid-gap: 3.2rem;
+  margin: 4rem 0;
 
   & .item-information {
     display: flex;

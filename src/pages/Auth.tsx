@@ -3,8 +3,6 @@ import AuthForm from "../components/Authentication/AuthForm";
 import Logo from "../components/UI/Logo";
 import { json, redirect } from "react-router-dom";
 import { firebaseConfig } from "../firebase";
-import { login } from "../store/auth-slice";
-import store from "../store";
 
 const AuthPage = () => {
   return (

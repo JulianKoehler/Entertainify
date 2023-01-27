@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Await, defer, useLoaderData } from "react-router-dom";
+import Content from "../components/Content/Content";
 import { firebaseConfig } from "../firebase";
 import { IBookmarked } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
@@ -12,7 +13,7 @@ const Bookmarked = () => {
       <section>
         <h1>Bookmarked</h1>
         <Suspense>
-          <Await resolve={bookmarked}>{loadedBookmarked => <p>{JSON.stringify(loadedBookmarked)}</p>}</Await>
+          <Await resolve={bookmarked}>{loadedBookmarked => <Content content={loadedBookmarked} />}</Await>
         </Suspense>
       </section>
     </PageContent>

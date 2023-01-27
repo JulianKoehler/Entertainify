@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData, useNavigate, useSubmit } from "react-router-dom";
+import { Outlet, useLoaderData, useNavigate, useSearchParams, useSubmit } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "../components/Navbar/Navbar";
 import searchIcon from "../assets/icon-search.svg";
@@ -9,6 +9,7 @@ const RootLayout = () => {
   const navigate = useNavigate();
   const submit = useSubmit();
   const token = useLoaderData();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (!token) {
@@ -43,6 +44,7 @@ const RootLayout = () => {
           <input
             type="search"
             placeholder="Search for movies or series"
+            onChange={e => setSearchParams({ search_query: e.target.value })}
           />
         </Search>
         <Outlet />
@@ -86,5 +88,5 @@ const Search = styled.div`
 `;
 
 const Main = styled.main`
-  max-width: calc(100% - 13.6rem);
+  width: calc(100% - 13.6rem);
 `;

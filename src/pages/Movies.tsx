@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Await, defer, redirect, useLoaderData } from "react-router-dom";
+import Content from "../components/Content/Content";
 import { firebaseConfig } from "../firebase";
 import { Movie } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
@@ -13,7 +14,7 @@ const Movies = () => {
       <section>
         <h1>Movies</h1>
         <Suspense>
-          <Await resolve={movies}>{loadedMovies => <p>{JSON.stringify(loadedMovies)}</p>}</Await>
+          <Await resolve={movies}>{loadedMovies => <Content content={loadedMovies} />}</Await>
         </Suspense>
       </section>
     </PageContent>

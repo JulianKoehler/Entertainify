@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Trending } from "../../models/moviesAndSeries";
 import Card from "../UI/Card";
+import PlayButton from "../UI/PlayButton";
+import Bookmark from "../../styles/UI/Bookmark";
 
 interface TrendingContentProps {
   content: Trending[];
@@ -27,6 +29,8 @@ const TrendingContent = ({ content }: TrendingContentProps) => {
             </div>
             <h3>{item.title}</h3>
           </InfoOverlay>
+          <PlayButton yOffset="50%" />
+          <Bookmark bookmarked={item.isBookmarked} />
         </Card>
       ))}
     </ContentRow>

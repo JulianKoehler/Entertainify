@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Await, defer, useLoaderData } from "react-router-dom";
 import styled from "styled-components";
-import RecommendedContent from "../components/Content/RecommendedContent";
+import Content from "../components/Content/Content";
 import TrendingContent from "../components/Content/TrendingContent";
 import { firebaseConfig } from "../firebase";
 import { Trending, Data as Recommended } from "../models/moviesAndSeries";
@@ -22,9 +22,7 @@ const Home = () => {
       <RecommendedSection>
         <h1>Recommended for you</h1>
         <Suspense fallback={<p>Please wait...</p>}>
-          <Await resolve={recommended}>
-            {loadedContent => <RecommendedContent content={loadedContent} />}
-          </Await>
+          <Await resolve={recommended}>{loadedContent => <Content content={loadedContent} />}</Await>
         </Suspense>
       </RecommendedSection>
     </PageContent>
@@ -79,15 +77,34 @@ async function loadRecommended() {
 const TrendingSection = styled.section`
   overflow-x: scroll;
   max-width: 100%;
+  padding-bottom: 2rem;
+
+  &::-webkit-scrollbar {
+    height: 1.7rem;
+    background-color: var(--greyish-blue);
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--semi-dark-blue);
+    border-radius: 1rem;
+    border: 0.4rem solid var(--greyish-blue);
+    width: 1rem;
+  }
 
   & h1 {
     margin-bottom: 4rem;
   }
 `;
+
 const RecommendedSection = styled.section`
   width: 100%;
 
   & h1 {
-    margin: 4rem 0;
+    margin: 3rem 0;
   }
 `;

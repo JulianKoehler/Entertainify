@@ -9,6 +9,7 @@ const GlobalStyles = createGlobalStyle`
         --white: #ffffff;
         --red: #fc4747;
         --dark-blue: #10141e;
+        --dark-blue-low-opacity: #10141e88;
         --greyish-blue: #5A698F;
         --semi-dark-blue: #161d2f;
         --active-nav-link: #5A698F;
