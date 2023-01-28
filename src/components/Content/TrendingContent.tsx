@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { Data, Trending } from "../../models/moviesAndSeries";
 import Card from "../UI/Card";
+import { Trending } from "../../models/moviesAndSeries";
 import PlayButton from "../UI/PlayButton";
-import { firebaseConfig } from "../../firebase";
-
 import Bookmark from "../UI/Bookmark";
+import toggleBookmark from "../../util/toggleBookmark";
 
 type TrendingContentProps = {
   content: Trending[];
@@ -13,7 +12,7 @@ type TrendingContentProps = {
 const TrendingContent = ({ content }: TrendingContentProps) => {
   return (
     <ContentRow>
-      {content.map((item, index) => {
+      {content.map((item: Trending) => {
         return (
           <Card
             key={item.title}
@@ -35,7 +34,7 @@ const TrendingContent = ({ content }: TrendingContentProps) => {
             </InfoOverlay>
             <Bookmark
               bookmarked={item.isBookmarked}
-              sendPatchRequest={isBookmarked => toggleBookmark(index, item, isBookmarked)}
+              sendPatchRequest={isBookmarked => toggleBookmark(item, isBookmarked)}
             />
           </Card>
         );
@@ -64,24 +63,3 @@ const InfoOverlay = styled.div`
     opacity: 0.75;
   }
 `;
-
-async function toggleBookmark(index: number, item: Data, isBookmarked: boolean) {
-  /* queryEndpoint is just removing the .json from the url so that I can put my index inbetween when sending the Patch request */
-  const queryEndpoint = firebaseConfig.dbIsTrending.slice(0, firebaseConfig.dbIsTrending.length - 5);
-
-  try {
-    const res = await fetch(`${queryEndpoint}/${index}.json`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ isBookmarked: !isBookmarked }),
-    });
-
-    if (!res.ok) {
-      throw new Error();
-    }
-  } catch (err) {
-    throw new Response(`Could not update bookmark for ${item.title}`);
-  }
-}

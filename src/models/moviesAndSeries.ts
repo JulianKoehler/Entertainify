@@ -1,4 +1,5 @@
-export interface Data {
+export interface MovieOrSeries {
+  id: number;
   category: string;
   isBookmarked: boolean;
   isTrending: boolean;
@@ -14,7 +15,7 @@ export interface Data {
   year: number;
 }
 
-export interface Trending extends Data {
+export interface Trending extends MovieOrSeries {
   isTrending: true;
   thumbnail: {
     regular: {
@@ -29,14 +30,14 @@ export interface Trending extends Data {
   };
 }
 
-export interface Movie extends Data {
+export interface Movie extends MovieOrSeries {
   category: "Movie";
 }
 
-export interface ISeries extends Data {
+export interface ISeries extends MovieOrSeries {
   category: "TV Series";
 }
 
-export interface IBookmarked extends Data {
+export interface IBookmarked extends MovieOrSeries {
   isBookmarked: true;
 }

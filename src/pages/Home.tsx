@@ -6,7 +6,7 @@ import TrendingContent from "../components/Content/TrendingContent";
 import ContentLoaderSpinner from "../components/UI/ContentLoaderSpinner";
 import { firebaseConfig } from "../firebase";
 import useDebounce from "../hooks/useDebounce";
-import { Trending, Data as Recommended } from "../models/moviesAndSeries";
+import { Trending, MovieOrSeries as Recommended, MovieOrSeries } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
 
 const Home = () => {
@@ -56,7 +56,7 @@ async function loadTrending() {
   const idToken = localStorage.getItem("entertainify_token");
 
   try {
-    const res = await fetch(`${firebaseConfig.dbIsTrending}?auth=${idToken}`);
+    const res = await fetch(`${firebaseConfig.dbAll}?auth=${idToken}`);
 
     if (!res.ok) {
       throw new Error(`Could not fetch trending movies and series, ${res.statusText}`);
@@ -64,17 +64,15 @@ async function loadTrending() {
 
     const resData = await res.json();
 
-    return resData;
+    return resData.filter((item: MovieOrSeries) => item.isTrending === true);
   } catch (err) {
     console.log(err);
   }
 }
 
 async function loadRecommended() {
-  const idToken = localStorage.getItem("entertainify_token");
-
   try {
-    const res = await fetch(`${firebaseConfig.dbRecommended}?auth=${idToken}`);
+    const res = await fetch(firebaseConfig.dbAll);
 
     if (!res.ok) {
       throw new Error(`Could not fetch recommended movies and series, ${res.statusText}`);
@@ -82,7 +80,7 @@ async function loadRecommended() {
 
     const resData = await res.json();
 
-    return resData;
+    return resData.filter((item: MovieOrSeries) => item.isTrending === false);
   } catch (err) {
     console.log(err);
   }

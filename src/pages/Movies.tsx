@@ -5,7 +5,7 @@ import ContentLoaderSpinner from "../components/UI/ContentLoaderSpinner";
 import { firebaseConfig } from "../firebase";
 import { Movie } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
-import { getAuthToken } from "../util/auth";
+import { MovieOrSeries } from "../models/moviesAndSeries";
 
 const Movies = () => {
   const { movies } = useLoaderData() as { movies: Promise<Movie[]> };
@@ -38,7 +38,7 @@ export async function loader() {
 
 async function loadMovies() {
   try {
-    const response = await fetch(firebaseConfig.dbMovies);
+    const response = await fetch(firebaseConfig.dbAll);
     console.log(response);
 
     if (response.status === 401) {
@@ -46,7 +46,7 @@ async function loadMovies() {
     }
 
     const resData = await response.json();
-    return resData;
+    return resData.filter((item: MovieOrSeries) => item.category === "Movie");
   } catch (err) {
     throw new Response("Unauthorized", {
       status: 401,

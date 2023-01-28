@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Await, defer, useLoaderData } from "react-router-dom";
 import Content from "../components/Content/Content";
 import { firebaseConfig } from "../firebase";
-import { IBookmarked } from "../models/moviesAndSeries";
+import { MovieOrSeries, IBookmarked } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
 
 const Bookmarked = () => {
@@ -36,14 +36,14 @@ export async function loader() {
 
 async function loadBookmarked() {
   try {
-    const response = await fetch(firebaseConfig.dbBookmarked);
+    const response = await fetch(firebaseConfig.dbAll);
 
     if (!response.ok) {
       throw new Error("Could not fetch bookmarked");
     }
 
     const resData = await response.json();
-    return resData;
+    return resData.filter((item: MovieOrSeries) => item.isBookmarked === true);
   } catch (err) {
     console.log(err);
   }

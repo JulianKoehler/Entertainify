@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useAppSelector } from "./store/hooks";
-import { selectAuth } from "./store/auth-slice";
 import AuthPage from "./pages/Auth";
 import Home, { loader as homeLoader } from "./pages/Home";
 import RootLayout from "./pages/Root";
@@ -25,24 +23,18 @@ import NotFound from "./pages/NotFound";
 // const recommended = data.filter(item => item.isTrending === false);
 
 function App() {
-  // useEffect(() => {
-  //   async function sendData() {
-  //     const response = fetch(firebaseConfig.dbAll, {
-  //       method: "put",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         isTrending,
-  //         bookmarked,
-  //         movies,
-  //         series,
-  //         recommended,
-  //       }),
-  //     });
-  //   }
-  //   sendData();
-  // }, []);
+  //   useEffect(() => {
+  //     async function sendData() {
+  //       const response = fetch(firebaseConfig.dbAll, {
+  //         method: "put",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(data),
+  //       });
+  //     }
+  //     sendData();
+  //   }, []);
 
   const router = createBrowserRouter([
     {

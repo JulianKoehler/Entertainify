@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import { Data as Recommended, IBookmarked, ISeries, Movie } from "../../models/moviesAndSeries";
+import { MovieOrSeries as Recommended, IBookmarked, ISeries, Movie } from "../../models/moviesAndSeries";
 import Card from "../UI/Card";
 import movieIcon from "../../assets/icon-category-movie.svg";
 import seriesIcon from "../../assets/icon-category-tv.svg";
 import PlayButton from "../UI/PlayButton";
-import Bookmark from "../../styles/UI/Bookmark";
+import Bookmark from "../UI/Bookmark";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
+import toggleBookmark from "../../util/toggleBookmark";
 
 type ContentProps = {
   content: Recommended[] | ISeries[] | Movie[] | IBookmarked[];
@@ -53,7 +54,10 @@ const Content = ({ content, headline }: ContentProps) => {
                 <span>{item.rating}</span>
               </div>
               <h3>{item.title}</h3>
-              <Bookmark bookmarked={item.isBookmarked} />
+              <Bookmark
+                bookmarked={item.isBookmarked}
+                sendPatchRequest={isBookmarked => toggleBookmark(item, isBookmarked)}
+              />{" "}
             </Card>
           );
         })}
