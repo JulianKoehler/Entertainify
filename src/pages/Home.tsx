@@ -3,6 +3,7 @@ import { Await, defer, useLoaderData, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import Content from "../components/Content/Content";
 import TrendingContent from "../components/Content/TrendingContent";
+import ContentLoaderSpinner from "../components/UI/ContentLoaderSpinner";
 import { firebaseConfig } from "../firebase";
 import useDebounce from "../hooks/useDebounce";
 import { Trending, Data as Recommended } from "../models/moviesAndSeries";
@@ -21,13 +22,13 @@ const Home = () => {
       {!debouncedQuery && (
         <TrendingSection>
           <h1>Trending</h1>
-          <Suspense fallback={<p>Please wait...</p>}>
+          <Suspense>
             <Await resolve={trending}>{loadedContent => <TrendingContent content={loadedContent} />}</Await>
           </Suspense>
         </TrendingSection>
       )}
       <RecommendedSection>
-        <Suspense fallback={<p>Please wait...</p>}>
+        <Suspense>
           <Await resolve={recommended}>
             {loadedContent => (
               <Content

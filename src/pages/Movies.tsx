@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Await, defer, redirect, useLoaderData } from "react-router-dom";
 import Content from "../components/Content/Content";
+import ContentLoaderSpinner from "../components/UI/ContentLoaderSpinner";
 import { firebaseConfig } from "../firebase";
 import { Movie } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
@@ -12,7 +13,7 @@ const Movies = () => {
   return (
     <PageContent>
       <section>
-        <Suspense fallback={<p>Please wait...</p>}>
+        <Suspense>
           <Await resolve={movies}>
             {loadedMovies => (
               <Content
@@ -38,14 +39,18 @@ export async function loader() {
 async function loadMovies() {
   try {
     const response = await fetch(firebaseConfig.dbMovies);
+    console.log(response);
 
-    if (!response.ok) {
-      throw new Error(`Could not fetch movies, ${response.statusText}`);
+    if (response.status === 401) {
+      throw new Error();
     }
 
     const resData = await response.json();
     return resData;
   } catch (err) {
-    console.log(err);
+    throw new Response("Unauthorized", {
+      status: 401,
+      statusText: "You are not authorized to view this content.",
+    });
   }
 }

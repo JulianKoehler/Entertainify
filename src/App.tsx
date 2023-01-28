@@ -25,18 +25,21 @@ import NotFound from "./pages/NotFound";
 // const recommended = data.filter(item => item.isTrending === false);
 
 function App() {
-  const clientIsAuthenticated = useAppSelector(selectAuth);
-
   // useEffect(() => {
   //   async function sendData() {
-  //     const response = fetch(firebaseConfig.dbRecommended, {
+  //     const response = fetch(firebaseConfig.dbAll, {
   //       method: "put",
   //       headers: {
   //         "Content-Type": "application/json",
   //       },
-  //       body: JSON.stringify(recommended),
+  //       body: JSON.stringify({
+  //         isTrending,
+  //         bookmarked,
+  //         movies,
+  //         series,
+  //         recommended,
+  //       }),
   //     });
-  //     console.log(response);
   //   }
   //   sendData();
   // }, []);

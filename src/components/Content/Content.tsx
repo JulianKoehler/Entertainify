@@ -20,7 +20,7 @@ const Content = ({ content, headline }: ContentProps) => {
 
   const filteredContent = debouncedQuery
     ? content.filter(item => item.title.toLowerCase().includes(debouncedQuery.toLowerCase()))
-    : content;
+    : content || [];
   const amountOfSearchResults = filteredContent.length;
 
   const resultHeadline = `Found ${amountOfSearchResults} ${
