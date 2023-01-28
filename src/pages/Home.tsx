@@ -3,11 +3,11 @@ import { Await, defer, useLoaderData, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import Content from "../components/Content/Content";
 import TrendingContent from "../components/Content/TrendingContent";
-import ContentLoaderSpinner from "../components/UI/ContentLoaderSpinner";
 import { firebaseConfig } from "../firebase";
 import useDebounce from "../hooks/useDebounce";
 import { Trending, MovieOrSeries as Recommended, MovieOrSeries } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
+import TrendingSection from "../styles/Pages/TrendingSection";
 
 const Home = () => {
   const { trending } = useLoaderData() as { trending: Promise<Trending[]> };
@@ -85,33 +85,6 @@ async function loadRecommended() {
     console.log(err);
   }
 }
-
-const TrendingSection = styled.section`
-  overflow-x: auto;
-  max-width: 100%;
-  padding-bottom: 2rem;
-
-  &::-webkit-scrollbar {
-    height: 1.7rem;
-    background-color: var(--greyish-blue);
-    border-radius: 1rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-clip: content-box;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--semi-dark-blue);
-    border-radius: 1rem;
-    border: 0.4rem solid var(--greyish-blue);
-    width: 1rem;
-  }
-
-  & h1 {
-    margin-bottom: 4rem;
-  }
-`;
 
 const RecommendedSection = styled.section`
   width: 100%;

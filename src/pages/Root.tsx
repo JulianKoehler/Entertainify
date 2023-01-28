@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar/Navbar";
 import searchIcon from "../assets/icon-search.svg";
 import { useEffect } from "react";
 import { getTokenDuration } from "../util/auth";
+import Searchbar from "../styles/UI/Searchbar";
 
 const RootLayout = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const RootLayout = () => {
     <>
       <Navbar />
       <Main>
-        <Search>
+        <Searchbar>
           <img
             src={searchIcon}
             alt="search"
@@ -46,7 +47,7 @@ const RootLayout = () => {
             placeholder="Search for movies or series"
             onChange={e => setSearchParams({ search_query: e.target.value })}
           />
-        </Search>
+        </Searchbar>
         <Outlet />
       </Main>
     </>
@@ -54,38 +55,6 @@ const RootLayout = () => {
 };
 
 export default RootLayout;
-
-const Search = styled.div`
-  display: flex;
-  align-items: center;
-  max-height: 5rem;
-  margin: 4rem 0 0 2rem;
-
-  & img {
-    max-width: 2.4rem;
-    max-height: 2.4rem;
-    margin-right: 2.4rem;
-  }
-
-  & input {
-    background-color: transparent;
-    border: none;
-    padding: 1rem 1rem 1rem 0;
-    color: var(--white);
-    font-size: 2.4rem;
-    font-weight: 300;
-    line-height: 3rem;
-    width: 100rem;
-    max-width: 100%;
-
-    -webkit-appearance: none;
-
-    &:focus {
-      outline: none;
-      border-bottom: 1px solid var(--greyish-blue);
-    }
-  }
-`;
 
 const Main = styled.main`
   width: calc(100% - 13.6rem);
