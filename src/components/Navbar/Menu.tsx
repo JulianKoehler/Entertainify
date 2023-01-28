@@ -1,10 +1,9 @@
-import React from "react";
-import { Form, Link } from "react-router-dom";
+import { Form } from "react-router-dom";
 import styled from "styled-components";
 
-interface MenuProps {
+type MenuProps = {
   toggleMenuHandler: VoidFunction;
-}
+};
 
 const Menu = ({ toggleMenuHandler }: MenuProps) => {
   return (

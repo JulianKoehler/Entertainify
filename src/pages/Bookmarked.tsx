@@ -11,9 +11,15 @@ const Bookmarked = () => {
   return (
     <PageContent>
       <section>
-        <h1>Bookmarked</h1>
         <Suspense>
-          <Await resolve={bookmarked}>{loadedBookmarked => <Content content={loadedBookmarked} />}</Await>
+          <Await resolve={bookmarked}>
+            {loadedBookmarked => (
+              <Content
+                content={loadedBookmarked}
+                headline="Bookmarked"
+              />
+            )}
+          </Await>
         </Suspense>
       </section>
     </PageContent>

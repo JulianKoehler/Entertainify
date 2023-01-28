@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import ErrorPage from "../styles/Pages/ErrorPageLayout";
 import Button from "../styles/UI/Button";
 import { getAuthToken } from "../util/auth";
 
@@ -27,20 +27,3 @@ const Error = () => {
 };
 
 export default Error;
-
-const ErrorPage = styled.main`
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -20%);
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  text-align: center;
-
-  & section {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-  }
-`;

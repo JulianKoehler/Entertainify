@@ -43,6 +43,7 @@ const Container = styled.div<{ yOffset: string }>`
   &:hover {
     transform: translate(-50%, -50%) scale(1.2);
     background-color: rgba(68, 68, 68, 0.75);
+    opacity: 1;
   }
 
   &:active {

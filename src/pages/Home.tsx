@@ -1,9 +1,10 @@
 import { Suspense } from "react";
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import Content from "../components/Content/Content";
 import TrendingContent from "../components/Content/TrendingContent";
 import { firebaseConfig } from "../firebase";
+import useDebounce from "../hooks/useDebounce";
 import { Trending, Data as Recommended } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
 
@@ -11,18 +12,30 @@ const Home = () => {
   const { trending } = useLoaderData() as { trending: Promise<Trending[]> };
   const { recommended } = useLoaderData() as { recommended: Promise<Recommended[]> };
 
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("search_query")!;
+  const debouncedQuery = useDebounce<string>(query, 350);
+
   return (
     <PageContent>
-      <TrendingSection>
-        <h1>Trending</h1>
-        <Suspense fallback={<p>Please wait...</p>}>
-          <Await resolve={trending}>{loadedContent => <TrendingContent content={loadedContent} />}</Await>
-        </Suspense>
-      </TrendingSection>
+      {!debouncedQuery && (
+        <TrendingSection>
+          <h1>Trending</h1>
+          <Suspense fallback={<p>Please wait...</p>}>
+            <Await resolve={trending}>{loadedContent => <TrendingContent content={loadedContent} />}</Await>
+          </Suspense>
+        </TrendingSection>
+      )}
       <RecommendedSection>
-        <h1>Recommended for you</h1>
         <Suspense fallback={<p>Please wait...</p>}>
-          <Await resolve={recommended}>{loadedContent => <Content content={loadedContent} />}</Await>
+          <Await resolve={recommended}>
+            {loadedContent => (
+              <Content
+                content={loadedContent}
+                headline="Recommended for you"
+              />
+            )}
+          </Await>
         </Suspense>
       </RecommendedSection>
     </PageContent>
@@ -75,7 +88,7 @@ async function loadRecommended() {
 }
 
 const TrendingSection = styled.section`
-  overflow-x: scroll;
+  overflow-x: auto;
   max-width: 100%;
   padding-bottom: 2rem;
 

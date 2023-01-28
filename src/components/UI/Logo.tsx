@@ -5,7 +5,6 @@ const Logo = () => {
     <img
       src={logo}
       alt="entertainify-logo"
-      
     />
   );
 };

@@ -11,9 +11,15 @@ const Series = () => {
   return (
     <PageContent>
       <section>
-        <h1>Series</h1>
         <Suspense>
-          <Await resolve={series}>{loadedSeries => <Content content={loadedSeries} />}</Await>
+          <Await resolve={series}>
+            {loadedSeries => (
+              <Content
+                content={loadedSeries}
+                headline="Series"
+              />
+            )}
+          </Await>
         </Suspense>
       </section>
     </PageContent>

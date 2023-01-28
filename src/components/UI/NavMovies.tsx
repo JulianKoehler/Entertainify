@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import NavIconWraper from "./NavIconWrapper";
+import NavIconWraper from "../../styles/UI/NavIconWrapper";
 
 const NavMovies = () => {
   const location = useLocation();

@@ -4,9 +4,9 @@ import Card from "../UI/Card";
 import PlayButton from "../UI/PlayButton";
 import Bookmark from "../../styles/UI/Bookmark";
 
-interface TrendingContentProps {
+type TrendingContentProps = {
   content: Trending[];
-}
+};
 
 const TrendingContent = ({ content }: TrendingContentProps) => {
   return (
@@ -19,17 +19,17 @@ const TrendingContent = ({ content }: TrendingContentProps) => {
             src={item.thumbnail.trending.large}
             alt={item.title}
           />
+          <PlayButton yOffset="50%" />
           <InfoOverlay>
             <div className="top-row">
-              <span> {item?.year}</span>
+              <span> {item.year}</span>
               <span>&middot;</span>
-              <span>{item?.category}</span>
+              <span>{item.category}</span>
               <span>&middot;</span>
-              <span>{item?.rating}</span>
+              <span>{item.rating}</span>
             </div>
             <h3>{item.title}</h3>
           </InfoOverlay>
-          <PlayButton yOffset="50%" />
           <Bookmark bookmarked={item.isBookmarked} />
         </Card>
       ))}

@@ -12,9 +12,15 @@ const Movies = () => {
   return (
     <PageContent>
       <section>
-        <h1>Movies</h1>
-        <Suspense>
-          <Await resolve={movies}>{loadedMovies => <Content content={loadedMovies} />}</Await>
+        <Suspense fallback={<p>Please wait...</p>}>
+          <Await resolve={movies}>
+            {loadedMovies => (
+              <Content
+                content={loadedMovies}
+                headline="Movies"
+              />
+            )}
+          </Await>
         </Suspense>
       </section>
     </PageContent>
@@ -34,7 +40,7 @@ async function loadMovies() {
     const response = await fetch(firebaseConfig.dbMovies);
 
     if (!response.ok) {
-      throw new Error("Could not fetch movies");
+      throw new Error(`Could not fetch movies, ${response.statusText}`);
     }
 
     const resData = await response.json();

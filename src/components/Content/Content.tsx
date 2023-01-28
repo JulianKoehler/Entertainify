@@ -6,53 +6,59 @@ import seriesIcon from "../../assets/icon-category-tv.svg";
 import PlayButton from "../UI/PlayButton";
 import Bookmark from "../../styles/UI/Bookmark";
 import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import useDebounce from "../../hooks/useDebounce";
 
-interface ContentProps {
+type ContentProps = {
   content: Recommended[] | ISeries[] | Movie[] | IBookmarked[];
-}
+  headline: string;
+};
 
-const Content = ({ content }: ContentProps) => {
+const Content = ({ content, headline }: ContentProps) => {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get("search_query");
+  const query = searchParams.get("search_query")!;
+  const debouncedQuery = useDebounce<string>(query, 350);
 
-  useEffect(() => {
-    console.log(query);
-  }, [searchParams]);
-
-  const filteredContent = query
-    ? content.filter(item => item.title.toLowerCase().includes(query.toLowerCase()))
+  const filteredContent = debouncedQuery
+    ? content.filter(item => item.title.toLowerCase().includes(debouncedQuery.toLowerCase()))
     : content;
+  const amountOfSearchResults = filteredContent.length;
+
+  const resultHeadline = `Found ${amountOfSearchResults} ${
+    amountOfSearchResults === 1 ? "result" : "results"
+  } for '${debouncedQuery}'`;
 
   return (
-    <ContentGrid>
-      {filteredContent.map(item => {
-        const categoryIcon = item.category === "Movie" ? movieIcon : seriesIcon;
-        return (
-          <Card key={item?.title}>
-            <img
-              src={item?.thumbnail.regular.large}
-              alt={item?.title}
-            />
-            <div className="item-information">
-              <span> {item?.year}</span>
-              <span>&middot;</span>
+    <>
+      <h1>{debouncedQuery ? resultHeadline : headline}</h1>
+      <ContentGrid>
+        {filteredContent.map(item => {
+          const categoryIcon = item.category === "Movie" ? movieIcon : seriesIcon;
+          return (
+            <Card key={item.title}>
               <img
-                className="category-icon"
-                src={categoryIcon}
-                alt={item?.category}
+                src={item.thumbnail.regular.large}
+                alt={item.title}
               />
-              <span>{item?.category}</span>
-              <span>&middot;</span>
-              <span>{item?.rating}</span>
-            </div>
-            <h3>{item.title}</h3>
-            <PlayButton yOffset="40%" />
-            <Bookmark bookmarked={item.isBookmarked} />
-          </Card>
-        );
-      })}
-    </ContentGrid>
+              <PlayButton yOffset="40%" />
+              <div className="item-information">
+                <span> {item.year}</span>
+                <span>&middot;</span>
+                <img
+                  className="category-icon"
+                  src={categoryIcon}
+                  alt={item.category}
+                />
+                <span>{item.category}</span>
+                <span>&middot;</span>
+                <span>{item.rating}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <Bookmark bookmarked={item.isBookmarked} />
+            </Card>
+          );
+        })}
+      </ContentGrid>
+    </>
   );
 };
 

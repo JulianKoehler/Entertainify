@@ -13,6 +13,7 @@ import { action as authAction } from "./pages/Auth";
 import { loader as tokenLoader } from "./util/auth";
 import { action as logoutAction } from "./pages/Logout";
 import Error from "./pages/Error";
+import NotFound from "./pages/NotFound";
 
 // import data from "../../starter-code/starter-code/data.json";
 // import { firebaseConfig } from "./firebase";
@@ -55,6 +56,7 @@ function App() {
     },
     { path: "auth", element: <AuthPage />, action: authAction },
     { path: "logout", action: logoutAction },
+    { path: "*", element: <NotFound /> },
   ]);
 
   return (
