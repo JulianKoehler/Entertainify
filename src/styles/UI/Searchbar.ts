@@ -22,12 +22,15 @@ const Searchbar = styled.div`
     line-height: 3rem;
     width: 100rem;
     max-width: 100%;
-
     -webkit-appearance: none;
 
     &:focus {
       outline: none;
-      border-bottom: 1px solid var(--greyish-blue);
+      border-bottom: 0.1rem solid var(--greyish-blue);
+
+      @media (max-width: 900px) {
+        border-bottom: none;
+      }
     }
   }
 `;

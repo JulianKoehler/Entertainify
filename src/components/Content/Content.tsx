@@ -8,6 +8,7 @@ import Bookmark from "../UI/Bookmark";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
 import toggleBookmark from "../../util/toggleBookmark";
+import ContentGrid from "../../styles/Pages/ContentGrid";
 
 type ContentProps = {
   content: Recommended[] | ISeries[] | Movie[] | IBookmarked[];
@@ -17,11 +18,12 @@ type ContentProps = {
 const Content = ({ content, headline }: ContentProps) => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("search_query")!;
-  const debouncedQuery = useDebounce<string>(query, 350);
+  const debouncedQuery = useDebounce<string>(query, 300);
 
   const filteredContent = debouncedQuery
     ? content.filter(item => item.title.toLowerCase().includes(debouncedQuery.toLowerCase()))
     : content || [];
+
   const amountOfSearchResults = filteredContent.length;
 
   const resultHeadline = `Found ${amountOfSearchResults} ${
@@ -67,27 +69,3 @@ const Content = ({ content, headline }: ContentProps) => {
 };
 
 export default Content;
-
-const ContentGrid = styled.div`
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(auto-fill, 28rem);
-  grid-gap: 3.2rem;
-  margin: 4rem 0;
-
-  & .item-information {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-
-    & span {
-      font-size: 1.3rem;
-      font-weight: 300;
-      opacity: 0.75;
-    }
-  }
-
-  & h3 {
-    font-size: 1.8rem;
-  }
-`;

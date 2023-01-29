@@ -14,10 +14,16 @@ const Bookmarked = () => {
         <Suspense>
           <Await resolve={bookmarked}>
             {loadedBookmarked => (
-              <Content
-                content={loadedBookmarked}
-                headline="Bookmarked"
-              />
+              <>
+                <Content
+                  content={loadedBookmarked.filter((item: MovieOrSeries) => item.category === "Movie")}
+                  headline="Bookmarked Movies"
+                />
+                <Content
+                  content={loadedBookmarked.filter((item: MovieOrSeries) => item.category === "TV Series")}
+                  headline="Bookmarked Series"
+                />
+              </>
             )}
           </Await>
         </Suspense>

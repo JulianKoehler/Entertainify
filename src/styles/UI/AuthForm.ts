@@ -17,6 +17,7 @@ const AuthPageWrapper = styled.div`
   & form {
     background-color: var(--semi-dark-blue);
     width: 40rem;
+    max-width: 85vw;
     padding: 3.2rem;
     border-radius: 2rem;
     display: flex;

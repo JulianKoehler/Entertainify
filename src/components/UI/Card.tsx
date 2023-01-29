@@ -22,6 +22,11 @@ const Wrapper = styled.div<{ trending: boolean }>`
     border-radius: 0.8rem;
     transition: opacity 0.25s;
 
+    @media (max-width: 900px) {
+      width: ${({ trending }) => (trending ? "47rem" : "22rem")};
+      height: ${({ trending }) => (trending ? "23rem" : "14rem")};
+    }
+
     &:hover {
       opacity: 0.5;
       cursor: pointer;

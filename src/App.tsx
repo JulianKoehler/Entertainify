@@ -13,29 +13,7 @@ import { action as logoutAction } from "./pages/Logout";
 import Error from "./pages/Error";
 import NotFound from "./pages/NotFound";
 
-// import data from "../../starter-code/starter-code/data.json";
-// import { firebaseConfig } from "./firebase";
-
-// const movies = data.filter(item => item.category === "Movie");
-// const series = data.filter(item => item.category === "TV Series");
-// const bookmarked = data.filter(item => item.isBookmarked === true);
-// const isTrending = data.filter(item => item.isTrending === true);
-// const recommended = data.filter(item => item.isTrending === false);
-
 function App() {
-  //   useEffect(() => {
-  //     async function sendData() {
-  //       const response = fetch(firebaseConfig.dbAll, {
-  //         method: "put",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       });
-  //     }
-  //     sendData();
-  //   }, []);
-
   const router = createBrowserRouter([
     {
       path: "/",

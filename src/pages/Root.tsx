@@ -1,16 +1,25 @@
-import { Outlet, useLoaderData, useNavigate, useSearchParams, useSubmit } from "react-router-dom";
+import {
+  Outlet,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+  useSubmit,
+} from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "../components/Navbar/Navbar";
 import searchIcon from "../assets/icon-search.svg";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { getTokenDuration } from "../util/auth";
 import Searchbar from "../styles/UI/Searchbar";
 
 const RootLayout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const submit = useSubmit();
   const token = useLoaderData();
   const [searchParams, setSearchParams] = useSearchParams();
+  const searchbarRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!token) {
@@ -30,8 +39,14 @@ const RootLayout = () => {
   }, [token, submit]);
 
   useEffect(() => {
-    navigate("/home");
-  }, []);
+    if (location.pathname === "/") {
+      navigate("/home");
+    }
+
+    if (location.search === "") {
+      searchbarRef.current!.value = "";
+    }
+  }, [location.pathname]);
 
   return (
     <>
@@ -43,6 +58,7 @@ const RootLayout = () => {
             alt="search"
           />
           <input
+            ref={searchbarRef}
             type="search"
             placeholder="Search for movies or series"
             onChange={e => setSearchParams({ search_query: e.target.value })}
@@ -58,4 +74,8 @@ export default RootLayout;
 
 const Main = styled.main`
   width: calc(100% - 13.6rem);
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
 `;

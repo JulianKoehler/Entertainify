@@ -33,6 +33,11 @@ const MenuWrapper = styled.div`
   position: relative;
   min-height: 6rem;
   transition: all 0.25s;
+
+  @media (max-width: 900px) {
+    margin: 0;
+    min-height: 0;
+  }
 `;
 
 const UserProfilePicture = styled.div`
@@ -42,8 +47,17 @@ const UserProfilePicture = styled.div`
   border-radius: 50%;
   border: 1px solid var(--white);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 900px) {
+    margin: 0;
+    width: 3.4rem;
+    height: 3.4rem;
+  }
 
   & img {
-    max-width: 100%;
+    height: 100%;
   }
 `;

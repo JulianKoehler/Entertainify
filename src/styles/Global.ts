@@ -84,12 +84,20 @@ const GlobalStyles = createGlobalStyle`
     #root {
         display: flex;
         max-width: 100%;
+
+        @media (max-width: 900px) {
+            flex-direction: column;
+        }
     }
 
     input:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 1000px var(--semi-dark-blue) inset !important;
         -webkit-text-fill-color: white !important;
         box-shadow: 0 0 0 1000px var(--semi-dark-blue) inset !important;
+    }
+
+    input {
+        caret-color: var(--red);
     }
 `;
 

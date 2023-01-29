@@ -13,7 +13,7 @@ const Home = () => {
   const { trending } = useLoaderData() as { trending: Promise<Trending[]> };
   const { recommended } = useLoaderData() as { recommended: Promise<Recommended[]> };
 
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("search_query")!;
   const debouncedQuery = useDebounce<string>(query, 350);
 
