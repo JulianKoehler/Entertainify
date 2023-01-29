@@ -7,6 +7,7 @@ import { firebaseConfig } from "../firebase";
 import useDebounce from "../hooks/useDebounce";
 import { Trending, MovieOrSeries as Recommended, MovieOrSeries } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
+import RecommendedSection from "../styles/Pages/RecommendedSection";
 import TrendingSection from "../styles/Pages/TrendingSection";
 
 const Home = () => {
@@ -85,11 +86,3 @@ async function loadRecommended() {
     console.log(err);
   }
 }
-
-const RecommendedSection = styled.section`
-  width: 100%;
-
-  & h1 {
-    margin: 3rem 0;
-  }
-`;

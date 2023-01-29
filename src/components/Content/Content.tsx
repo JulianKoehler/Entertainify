@@ -40,6 +40,7 @@ const Content = ({ content, headline }: ContentProps) => {
             <Card key={item.title}>
               <img
                 src={item.thumbnail.regular.large}
+                srcSet={`${item.thumbnail.regular.medium} 450w`}
                 alt={item.title}
               />
               <PlayButton yOffset="40%" />

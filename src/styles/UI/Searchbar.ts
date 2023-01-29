@@ -6,10 +6,18 @@ const Searchbar = styled.div`
   max-height: 5rem;
   margin: 4rem 0 0 2rem;
 
+  @media (max-width: 450px) {
+    margin: 2.4rem 0 0 1.6rem;
+  }
+
   & img {
-    max-width: 2.4rem;
-    max-height: 2.4rem;
+    width: 2.4rem;
+    height: 2.4rem;
     margin-right: 2.4rem;
+
+    @media (max-width: 450px) {
+      margin-right: 1.6rem;
+    }
   }
 
   & input {
@@ -31,6 +39,11 @@ const Searchbar = styled.div`
       @media (max-width: 900px) {
         border-bottom: none;
       }
+    }
+
+    @media (max-width: 450px) {
+      font-size: 1.6rem;
+      padding: 0 2rem 0 0;
     }
   }
 `;

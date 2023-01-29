@@ -11,6 +11,17 @@ const ContentGrid = styled.div`
     grid-template-columns: repeat(auto-fill, 22rem);
   }
 
+  @media (max-width: 450px) {
+    grid-template-columns: repeat(auto-fill, 16.4rem);
+    grid-gap: auto;
+    margin: 2.4rem 0;
+  }
+
+  @media (max-width: 380px) {
+    grid-template-columns: repeat(auto-fill, 95%);
+    grid-row-gap: 3rem;
+  }
+
   & .item-information {
     display: flex;
     align-items: center;

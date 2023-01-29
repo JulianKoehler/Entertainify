@@ -50,18 +50,33 @@ const GlobalStyles = createGlobalStyle`
         font-size: 3.2rem;
         line-height: 4rem;
         letter-spacing: -0.05rem;
+
+        @media (max-width: 450px) {
+        font-size: 2rem;
+        }
     }
 
     h2 {
         font-weight: 300;
         font-size: 2.4rem;
         line-height: 3rem;
+
+        @media (max-width: 450px) {
+        font-size: 1.4rem;
+        line-height: 1.9rem;
+
+        }
     }
 
     h3 {
         font-weight: 500;
         font-size: 2.4rem;
         line-height: 3rem;
+
+        @media (max-width: 450px) {
+        font-size: 1.5rem;
+        line-height: 1.9rem;
+        }
     }
 
     h4 {

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import Sidebar from "../../styles/Navbar/Sidebar";
+import NavbarLayout from "../../styles/Navbar/Navbar";
 import Logo from "../UI/Logo";
 import NavBookmarked from "../UI/NavBookmarked";
 import NavHome from "../UI/NavHome";
@@ -9,7 +9,7 @@ import NavUserProfile from "../UI/NavUserProfile";
 
 function Navbar() {
   return (
-    <Sidebar>
+    <NavbarLayout>
       <div className="content">
         <Logo />
         <nav>
@@ -36,7 +36,7 @@ function Navbar() {
         </nav>
         <NavUserProfile />
       </div>
-    </Sidebar>
+    </NavbarLayout>
   );
 }
 

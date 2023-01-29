@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Sidebar = styled.aside`
+const NavbarLayout = styled.aside`
   background-color: transparent;
   padding: 2rem;
   display: inline-block;
@@ -10,6 +10,10 @@ const Sidebar = styled.aside`
   @media (max-width: 900px) {
     height: 7.2rem;
     width: 100%;
+  }
+
+  @media (max-width: 450px) {
+    padding: 0;
   }
 
   & .content {
@@ -32,13 +36,27 @@ const Sidebar = styled.aside`
       gap: 0;
     }
 
-    & img {
+    @media (max-width: 450px) {
+      border-radius: 0;
+    }
+
+    & img:not(.logo) {
       width: 3.8rem;
       height: 3.8rem;
 
       @media (max-width: 900px) {
         width: 3.2rem;
         height: 3.2rem;
+      }
+    }
+
+    .logo {
+      width: 3.2rem;
+      height: 2.6rem;
+
+      @media (max-width: 450px) {
+        width: 2.5rem;
+        height: 2rem;
       }
     }
 
@@ -64,6 +82,13 @@ const Sidebar = styled.aside`
   & .navLink:hover > .navLink__cell {
     fill: var(--red);
   }
+
+  & .navLink {
+    @media (max-width: 450px) {
+      /* width: 1.6rem;
+      height: 1.6rem; */
+    }
+  }
 `;
 
-export default Sidebar;
+export default NavbarLayout;

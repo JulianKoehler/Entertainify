@@ -49,4 +49,8 @@ const BookmarkIcon = styled.div<{ bookmarked: boolean }>`
   &:active {
     transform: scale(0.9);
   }
+
+  @media (max-width: 450px) {
+    margin: 0.8rem;
+  }
 `;

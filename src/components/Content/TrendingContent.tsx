@@ -19,6 +19,7 @@ const TrendingContent = ({ content }: TrendingContentProps) => {
             trending={true}>
             <img
               src={item.thumbnail.trending.large}
+              srcSet={`${item.thumbnail.trending.small} 450w`}
               alt={item.title}
             />
             <PlayButton yOffset="50%" />
@@ -49,6 +50,10 @@ const ContentRow = styled.div`
   max-width: 100%;
   display: flex;
   gap: 4rem;
+
+  @media (max-width: 450px) {
+    gap: 1.6rem;
+  }
 `;
 
 const InfoOverlay = styled.div`
@@ -61,5 +66,11 @@ const InfoOverlay = styled.div`
     display: flex;
     gap: 0.78rem;
     opacity: 0.75;
+
+    & span {
+      @media (max-width: 450px) {
+        font-size: 1.2rem;
+      }
+    }
   }
 `;

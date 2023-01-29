@@ -21,14 +21,9 @@ export default Menu;
 
 const MenuContainer = styled.div`
   position: absolute;
-  top: -3.5rem;
+  bottom: -5.5rem;
   left: 50%;
   transform: translateX(-50%);
-
-  @media (max-width: 900px) {
-    top: -0.5rem;
-    left: -4.5rem;
-  }
 `;
 
 const LogoutButton = styled.button`

@@ -24,6 +24,10 @@ const TrendingSection = styled.section`
 
   & h1 {
     margin-bottom: 4rem;
+
+    @media (max-width: 450px) {
+      margin-bottom: 1.6rem;
+    }
   }
 `;
 

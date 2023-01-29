@@ -7,7 +7,7 @@ import {
   useSubmit,
 } from "react-router-dom";
 import styled from "styled-components";
-import Navbar from "../components/Navbar/Navbar";
+import NavbarLayout from "../components/Navbar/Navbar";
 import searchIcon from "../assets/icon-search.svg";
 import { useEffect, useRef } from "react";
 import { getTokenDuration } from "../util/auth";
@@ -50,7 +50,7 @@ const RootLayout = () => {
 
   return (
     <>
-      <Navbar />
+      <NavbarLayout />
       <Main>
         <Searchbar>
           <img

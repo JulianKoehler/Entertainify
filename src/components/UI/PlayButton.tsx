@@ -30,6 +30,7 @@ const Container = styled.div<{ yOffset: string }>`
   top: ${({ yOffset }) => yOffset};
   left: 50%;
   padding: 1rem;
+  font-size: 1.8rem;
   border-radius: 2.85rem;
   background-color: rgba(255, 255, 255, 0.25);
   transform: translate(-50%, -50%);
@@ -39,6 +40,10 @@ const Container = styled.div<{ yOffset: string }>`
   cursor: pointer;
   transition: transform 0.25s;
   opacity: 0;
+
+  @media (max-width: 450px) {
+    display: none;
+  }
 
   &:hover {
     transform: translate(-50%, -50%) scale(1.2);

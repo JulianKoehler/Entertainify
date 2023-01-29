@@ -27,6 +27,16 @@ const Wrapper = styled.div<{ trending: boolean }>`
       height: ${({ trending }) => (trending ? "23rem" : "14rem")};
     }
 
+    @media (max-width: 450px) {
+      width: ${({ trending }) => (trending ? "24rem" : "16.4rem")};
+      height: ${({ trending }) => (trending ? "14rem" : "11rem")};
+    }
+
+    @media (max-width: 380px) {
+      width: ${({ trending }) => (trending ? "24rem" : "100%")};
+      height: ${({ trending }) => (trending ? "14rem" : "auto")};
+    }
+
     &:hover {
       opacity: 0.5;
       cursor: pointer;
