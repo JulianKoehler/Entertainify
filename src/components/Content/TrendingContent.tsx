@@ -18,8 +18,8 @@ const TrendingContent = ({ content }: TrendingContentProps) => {
             key={item.title}
             trending={true}>
             <img
-              src={item.thumbnail.trending.large}
-              srcSet={`${item.thumbnail.trending.small} 450w`}
+              srcSet={`${item.thumbnail.trending.large} 460w`}
+              src={item.thumbnail.trending.small}
               alt={item.title}
             />
             <PlayButton yOffset="50%" />

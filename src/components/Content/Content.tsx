@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { MovieOrSeries as Recommended, IBookmarked, ISeries, Movie } from "../../models/moviesAndSeries";
 import Card from "../UI/Card";
 import movieIcon from "../../assets/icon-category-movie.svg";
