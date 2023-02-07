@@ -35,10 +35,11 @@ const AuthForm = () => {
 
   const authData = useActionData();
   const isEmailInvalid = authData === "INVALID_EMAIL";
+  const isEmailAlreadyExising = authData === "EMAIL_EXISTS";
+  const emailNotFound = authData === "EMAIL_NOT_FOUND";
   const isPasswordInvalid = authData === "INVALID_PASSWORD";
   const isPasswordTooShort = authData === "WEAK_PASSWORD : Password should be at least 6 characters";
   const isMissingPassword = authData === "MISSING_PASSWORD";
-  const emailNotFound = authData === "EMAIL_NOT_FOUND";
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -74,7 +75,7 @@ const AuthForm = () => {
       <h1>{isLogin ? "Login" : "Sign up"}</h1>
       <input
         ref={emailRef}
-        className={isEmailInvalid || emailNotFound ? "invalid" : ""}
+        className={isEmailInvalid || emailNotFound || isEmailAlreadyExising ? "invalid" : ""}
         type="email"
         name="email"
         placeholder="Email address"
@@ -82,8 +83,9 @@ const AuthForm = () => {
       />
       {isEmailInvalid && <p className="invalid-email">Invalid email address</p>}
       {emailNotFound && <p className="invalid-email">Email not found</p>}
+      {isEmailAlreadyExising && <p className="invalid-email">Email already existing</p>}
       <input
-        className={isPasswordInvalid ? "invalid" : ""}
+        className={isPasswordInvalid || isPasswordTooShort ? "invalid" : ""}
         ref={passwordRef}
         type="password"
         name="password"
