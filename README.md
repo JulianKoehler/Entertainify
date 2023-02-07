@@ -17,13 +17,13 @@ This is a solution to the [Entertainment web app challenge on Frontend Mentor](h
 
 ### The challenge
 
-Users should be able to:
+Users are be able to:
 
 - Register or login on the initial screen
 - View the optimal layout for the app depending on their device's screen size
 - See hover states for all interactive elements on the page
 - Navigate between Home, Movies, TV Series, and Bookmarked Shows pages
-- Add/Remove bookmarks from all movies and TV series
+- Add/Remove bookmarks from all movies and TV series and see immediate changes
 - Search for relevant shows on all pages
 
 ### Screenshot
@@ -57,6 +57,8 @@ In this project I am leveraging the recent update of React Router Dom by using i
 ### What I learned
 
 During this project I learned a lot about authentication in generel. Since this is a dummy app which is supposed to demonstrate my skills in frontend web development I kept things simple and didn't implement a heavy backend solution but rather used the firebase REST API solution. I studied a lot of resource regarding security, how to save the token safely. In my case, I needed an easy solution to access the JWT Token on the client side since my Route Protection is checking the localStorage, if a token is existing there. For the future, I am super curious about other, more safe and industry standard solutions to this.
+
+I also learned a bit about databases. Since firebase is using a noSQL solution, I needed to come up with a database structure that is fitting my requirements. In the end I decided to go with a central node, fetching the whole data in the client and just return a filtered Array from the loader function. This works in this case, since there is not much data to fetch.
 
 ## Author
 
