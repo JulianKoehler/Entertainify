@@ -54,10 +54,8 @@ export async function loader() {
 }
 
 async function loadTrending() {
-  const idToken = localStorage.getItem("entertainify_token");
-
   try {
-    const res = await fetch(`${firebaseConfig.dbAll}?auth=${idToken}`);
+    const res = await fetch(firebaseConfig.dbAll);
 
     if (!res.ok) {
       throw new Error(`Could not fetch trending movies and series, ${res.statusText}`);
