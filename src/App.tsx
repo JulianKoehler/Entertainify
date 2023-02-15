@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthPage from "./pages/Auth";
 import Home, { loader as homeLoader } from "./pages/Home";

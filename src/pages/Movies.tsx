@@ -1,7 +1,6 @@
 import { Suspense } from "react";
-import { Await, defer, redirect, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData } from "react-router-dom";
 import Content from "../components/Content/Content";
-import ContentLoaderSpinner from "../components/UI/ContentLoaderSpinner";
 import { firebaseConfig } from "../firebase";
 import { Movie } from "../models/moviesAndSeries";
 import PageContent from "../styles/Pages/PageContent";
@@ -39,18 +38,16 @@ export async function loader() {
 async function loadMovies() {
   try {
     const response = await fetch(firebaseConfig.dbAll);
-    console.log(response);
 
-    if (response.status === 401) {
+    if (!response.ok) {
       throw new Error();
     }
 
     const resData = await response.json();
     return resData.filter((item: MovieOrSeries) => item.category === "Movie");
   } catch (err) {
-    throw new Response("Unauthorized", {
-      status: 401,
-      statusText: "You are not authorized to view this content.",
-    });
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
   }
 }

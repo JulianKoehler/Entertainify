@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { Await, defer, useLoaderData, useSearchParams } from "react-router-dom";
-import styled from "styled-components";
 import Content from "../components/Content/Content";
 import TrendingContent from "../components/Content/TrendingContent";
 import { firebaseConfig } from "../firebase";
