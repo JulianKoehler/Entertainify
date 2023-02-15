@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Await, defer, redirect, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData } from "react-router-dom";
 import Content from "../components/Content/Content";
 import { firebaseConfig } from "../firebase";
 import { ISeries, MovieOrSeries } from "../models/moviesAndSeries";
